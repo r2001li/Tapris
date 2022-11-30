@@ -3,7 +3,7 @@ from os import environ
 from dotenv import load_dotenv
 
 load_dotenv()
-TOKEN = environ['TOKEN']
+TOKEN = environ['DISCORD_TOKEN']
 
 intents = discord.Intents.default()
 intents.message_content = True
