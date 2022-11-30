@@ -13,7 +13,10 @@ async def on_ready():
 
 ''' Features Start '''
 
-
+@client.event
+async def on_message(message):
+    if message.author == client.user:
+        return
 
 ''' Features End '''
 
