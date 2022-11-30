@@ -11,4 +11,10 @@ client = discord.Client()
 async def on_ready():
     print(f'{client.user} online.')
 
+''' Features Start '''
+
+
+
+''' Features End '''
+
 client.run(TOKEN)
