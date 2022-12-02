@@ -1,4 +1,5 @@
 import discord
+
 from os import environ
 from dotenv import load_dotenv
 
@@ -10,11 +11,13 @@ intents.message_content = True
 
 client = discord.Client(intents=intents)
 
+
 @client.event
 async def on_ready():
     print(f'{client.user} online.')
 
 ''' Features Start '''
+
 
 @client.event
 async def on_message(message):
