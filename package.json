@@ -1,0 +1,22 @@
+{
+  "name": "tapris",
+  "version": "1.0.0",
+  "description": "A Discord bot that does things",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/r2001li/Tapris.git"
+  },
+  "author": "Nero",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/r2001li/Tapris/issues"
+  },
+  "homepage": "https://github.com/r2001li/Tapris#readme",
+  "dependencies": {
+    "discord.js": "^14.7.1"
+  }
+}
