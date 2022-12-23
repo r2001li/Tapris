@@ -2,6 +2,7 @@ const { Client, Events, GatewayIntentBits, Collection } = require("discord.js");
 const { token } = require("./config.json");
 const fs = require("node:fs");
 const path = require("node:path");
+const Sequelize = require("sequelize");
 
 const client = new Client({
   intents: [
@@ -10,6 +11,29 @@ const client = new Client({
     GatewayIntentBits.GuildMessages,
     GatewayIntentBits.MessageContent,
   ],
+});
+
+// Define database connection
+const sequelize = new Sequelize("database", "user", "password", {
+  host: "localhost",
+  dialect: "sqlite",
+  logging: false,
+  storage: "database.sqlite",
+});
+
+// Define tag system
+client.Tags = sequelize.define("tags", {
+  name: {
+    type: Sequelize.STRING,
+    unique: true,
+  },
+  description: Sequelize.STRING,
+  username: Sequelize.STRING,
+  usage_count: {
+    type: Sequelize.INTEGER,
+    defaultValue: 0,
+    allowNull: false,
+  },
 });
 
 // Read event files
