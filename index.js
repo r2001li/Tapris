@@ -3,7 +3,14 @@ const { token } = require("./config.json");
 const fs = require("node:fs");
 const path = require("node:path");
 
-const client = new Client({ intents: [GatewayIntentBits.Guilds] });
+const client = new Client({
+  intents: [
+    GatewayIntentBits.Guilds,
+    GatewayIntentBits.GuildMembers,
+    GatewayIntentBits.GuildMessages,
+    GatewayIntentBits.MessageContent,
+  ],
+});
 
 // Read event files
 const eventsPath = path.join(__dirname, "events");
