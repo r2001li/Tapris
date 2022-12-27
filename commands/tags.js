@@ -22,6 +22,17 @@ module.exports = {
         .addStringOption((option) =>
           option.setName("name").setDescription("tag name")
         )
+    )
+    .addSubcommand((subcommand) =>
+      subcommand.setName("list").setDescription("List all tags")
+    )
+    .addSubcommand((subcommand) =>
+      subcommand
+        .setName("delete")
+        .setDescription("Delete a tag")
+        .addStringOption((option) =>
+          option.setName("name").setDescription("tag name")
+        )
     ),
   async execute(interaction) {
     if (interaction.options.getSubcommand() === "create") {
@@ -49,7 +60,22 @@ module.exports = {
       if (tag) {
         tag.increment("usage_count");
         return interaction.reply(tag.get("description"));
-      }
+      } else return interaction.reply(`Tag ${tagName} not found.`);
+    } else if (interaction.options.getSubcommand() === "list") {
+      const tagList = await interaction.client.Tags.findAll({
+        attributes: ["name"],
+      });
+      const tagString =
+        tagList.map((t) => t.name).join(", ") || "No tags found.";
+
+      return interaction.reply(`List of tags: ${tagString}`);
+    } else if (interaction.options.getSubcommand() === "delete") {
+      const tagName = interaction.options.getString("name");
+      const rowCount = await interaction.client.Tags.destroy({
+        where: { name: tagName },
+      });
+      if (!rowCount) return interaction.reply(`Tag ${tagName} not found.`);
+      return interaction.reply(`Tag ${tagName} deleted.`);
     }
   },
 };
